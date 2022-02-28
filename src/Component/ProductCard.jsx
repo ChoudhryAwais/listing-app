@@ -10,7 +10,7 @@ export default function ProductCard({
 }) {
   useEffect(() => {
     getReview();
-  }, []);
+  });
 
   const [productRating, setProductRating] = useState(0);
   const getReview = async () => {
@@ -24,11 +24,12 @@ export default function ProductCard({
     setProductRating(parseInt(averageReview));
   };
 
+  const tagsList = ["#tag 1", "#tag 2", "#tag 3"];
+
   const showStar = () => {
     if (productRating === 0) {
       return (
         <React.Fragment>
-          {" "}
           <i class="fa fa-star"></i>
           <i class="fa fa-star"></i>
           <i class="fa fa-star"></i>
@@ -39,7 +40,6 @@ export default function ProductCard({
     } else if (productRating === 1) {
       return (
         <React.Fragment>
-          {" "}
           <i class="fa fa-star" style={{ color: "yellow" }}></i>
           <i class="fa fa-star "></i>
           <i class="fa fa-star "></i>
@@ -50,7 +50,6 @@ export default function ProductCard({
     } else if (productRating === 2) {
       return (
         <React.Fragment>
-          {" "}
           <i class="fa fa-star" style={{ color: "yellow" }}></i>
           <i class="fa fa-star" style={{ color: "yellow" }}></i>
           <i class="fa fa-star "></i>
@@ -61,7 +60,6 @@ export default function ProductCard({
     } else if (productRating === 3) {
       return (
         <React.Fragment>
-          {" "}
           <i class="fa fa-star" style={{ color: "yellow" }}></i>
           <i class="fa fa-star" style={{ color: "yellow" }}></i>
           <i class="fa fa-star" style={{ color: "yellow" }}></i>
@@ -72,7 +70,6 @@ export default function ProductCard({
     } else if (productRating === 4) {
       return (
         <React.Fragment>
-          {" "}
           <i class="fa fa-star" style={{ color: "yellow" }}></i>
           <i class="fa fa-star" style={{ color: "yellow" }}></i>
           <i class="fa fa-star" style={{ color: "yellow" }}></i>
@@ -83,7 +80,6 @@ export default function ProductCard({
     } else if (productRating === 5) {
       return (
         <React.Fragment>
-          {" "}
           <i class="fa fa-star" style={{ color: "yellow" }}></i>
           <i class="fa fa-star" style={{ color: "yellow" }}></i>
           <i class="fa fa-star" style={{ color: "yellow" }}></i>
@@ -154,6 +150,30 @@ export default function ProductCard({
               <h4 className="font-weight-semibold mt-1">{items.title}</h4>
             </a>
             <p>{items.description}</p>
+            <div
+              style={{
+                display: "flex",
+                alignItems: "center",
+                flexDirection: "row",
+                flexWrap: "wrap",
+              }}
+            >
+              {tagsList.map((item) => {
+                return (
+                  <p
+                    style={{
+                      margin: "0 0 4px 4px",
+                      padding: "2px 4px",
+                      borderRadius: "4px",
+                      border: "1px solid rgba(0, 0, 0, 0.19)",
+                      cursor: "pointer",
+                    }}
+                  >
+                    {item}
+                  </p>
+                );
+              })}
+            </div>
           </div>
         </div>
         <div className="card-footer">

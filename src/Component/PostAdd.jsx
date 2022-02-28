@@ -4,6 +4,8 @@ import { mapStateToProps, mapDispatchToProps } from "./Action/Action";
 import { connect } from "react-redux";
 import Swal from "sweetalert2";
 import { Form, Row, Col, InputGroup, Button } from "react-bootstrap";
+import { MultiSelect } from "react-multi-select-component";
+import MultipleSelect from "./MultipleSelect";
 
 class PostAdd extends Component {
   constructor(props) {
@@ -18,6 +20,7 @@ class PostAdd extends Component {
       mainimg: (this.props.editData || {}).mainimg || "",
       address: (this.props.editData || {}).address || "",
       location: (this.props.editData || {}).location || "",
+      tags: (this.props.editData || {}).tags || "",
       phonenumber: (this.props.editData || {}).phonenumber || "",
       description: (this.props.editData || {}).description || "",
     };
@@ -25,6 +28,7 @@ class PostAdd extends Component {
     this.state = {
       categoryList: [],
       locationList: [],
+      tagsList: ["1", "2"],
       saveModal: this.saveModal,
       validated: false,
     };
@@ -93,32 +97,31 @@ class PostAdd extends Component {
     this.setState({ validated: true });
   };
   handlePhoto = (e) => {
-    const { target } = e
-    const fileInfo = (Object.values(target.files) || "")[0].File
-
-  }
+    const { target } = e;
+    const fileInfo = (Object.values(target.files) || "")[0].File;
+  };
 
   getBase64(file, cb) {
     let reader = new FileReader();
     reader.readAsDataURL(file);
     reader.onload = function () {
-      cb(reader.result)
+      cb(reader.result);
     };
     reader.onerror = function (error) {
-      console.log('Error: ', error);
+      console.log("Error: ", error);
     };
   }
 
   handlePhoto = async (e) => {
     e.preventDefault();
-    debugger
-    const fileInfo = e.target.files
+    debugger;
+    const fileInfo = e.target.files;
     const formData = new FormData();
     let newArr = [];
     for (let i = 0; i < fileInfo.length; i++) {
       newArr.push(fileInfo[i]);
     }
-    formData.push('monfichier', newArr);
+    formData.push("monfichier", newArr);
 
     console.log(formData);
 
@@ -127,7 +130,8 @@ class PostAdd extends Component {
     //   .then((res) => res.data);
   };
   render() {
-    const { categoryList, saveModal, locationList, validated } = this.state;
+    const { categoryList, saveModal, locationList, tagsList, validated } =
+      this.state;
     const { editData, handleCloseEditAdd, handleUpdatePost } = this.props;
 
     return (
@@ -340,19 +344,13 @@ class PostAdd extends Component {
                             </Form.Control>
                           </div>
                         </div>
+
                         <div className="col-sm-12 col-md-12">
                           <div className="form-group">
-                            <label className="form-label">Tag</label>
-                            <Form.Control
-                              required
-                              type="email"
-                              className="form-control"
-                              name="tag"
-                              value={saveModal.tag}
-                              onChange={this.handleField}
-                            />
+                            <MultipleSelect />
                           </div>
                         </div>
+
                         <div className="col-sm-12 col-md-12">
                           <label
                             htmlFor="exampleInputEmail1"

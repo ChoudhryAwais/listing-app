@@ -7,8 +7,8 @@ import { useSelector } from "react-redux";
 import { useDispatch } from "react-redux";
 
 const BrowseCategories = () => {
-  const reduxState = useSelector(state => state)
-  const dispatch = useDispatch()
+  const reduxState = useSelector((state) => state);
+  const dispatch = useDispatch();
   useEffect(() => {
     ExternalJsCall();
     getNonpremiumadd();
@@ -62,11 +62,8 @@ const BrowseCategories = () => {
     dispatch({
       type: "MainSearch",
       data: "",
-    })
+    });
   };
-  useEffect(() => {
-    hanldeSearch();
-  }, [searchModal]);
 
   const hanldeSearch = () => {
     let allAddsforFilter = [...allAdds];
@@ -96,6 +93,9 @@ const BrowseCategories = () => {
     }
     setAllAddsFilter(filterAdds);
   };
+  useEffect(() => {
+    hanldeSearch();
+  }, [searchModal]);
   const [CurrentPageKey, setCurrentPageKey] = useState(100);
   const browseCategory = (
     <React.Fragment>
@@ -123,12 +123,7 @@ const BrowseCategories = () => {
                         <div className="form-group col-xl-10 col-lg-9 col-md-12 mb-0">
                           <input
                             type="text"
-                            className="
-                    form-control
-                    input-lg
-                    border-end-0
-                    br-be-0 br-te-0
-                  "
+                            className="form-control input-lg border-end-0 br-be-0 br-te-0"
                             id="text"
                             name="title"
                             placeholder="What are you looking for?"
@@ -142,7 +137,7 @@ const BrowseCategories = () => {
                             className="btn btn-lg btn-block btn-primary br-bs-0 br-ts-0"
                             onClick={(e) => {
                               e.preventDefault();
-                              hanldeSearch()
+                              hanldeSearch();
                             }}
                           >
                             Search
@@ -289,7 +284,13 @@ const BrowseCategories = () => {
       </div>
     </React.Fragment>
   );
-  const product = <Product seletedAdd={seletedAdd} allAdds={allAdds} handlePageKey={handlePageKey}/>;
+  const product = (
+    <Product
+      seletedAdd={seletedAdd}
+      allAdds={allAdds}
+      handlePageKey={handlePageKey}
+    />
+  );
   if (CurrentPageKey === 100) {
     return <React.Fragment>{browseCategory}</React.Fragment>;
   } else if (CurrentPageKey === 101) {
