@@ -4,14 +4,14 @@ import { Link } from "react-router-dom";
 import { callApi } from "../Utitlies/callAPI";
 import Swal from "sweetalert2";
 import { useDispatch } from "react-redux";
-import { useNavigate  } from "react-router";
+import { useNavigate } from "react-router";
 export default function Home() {
   useEffect(() => {
     getCategoris();
   }, []);
 
-  const dispatch = useDispatch()
-  const navigate = useNavigate()
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
   // const [categorisData, setCategorisData] = useState([]);
   const [searchField, setSearchField] = useState("");
   const [saveModal, setSaveModal] = useState({
@@ -37,17 +37,17 @@ export default function Home() {
     // setCategorisData(data?.data);
   };
   const handleGlobalSearch = (e) => {
-    e.preventDefault()
+    e.preventDefault();
     dispatch({
       type: "MainSearch",
       data: searchField,
-    })
+    });
     dispatch({
       type: "ActiveNav",
-      data: 'Browse Categories',
+      data: "Browse Categories",
     });
-    navigate("/browse_categories")
-  }
+    navigate("/browse_categories");
+  };
 
   return (
     <React.Fragment>
