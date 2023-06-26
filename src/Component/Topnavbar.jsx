@@ -71,9 +71,6 @@ class Topnavbar extends Component {
                       <ul className="custom">
                         <li>
                           <a
-                            onClick={(e) => {
-                              e.preventDefault();
-                            }}
                             href="#"
                             className="text-dark"
                             onClick={this.hanldeRegisterPop}
